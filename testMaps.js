@@ -1,30 +1,36 @@
  function initialize() 
  {
 
+        // List that holds all of the locations for adding to the Google Map later
 	    var nodes = [
 	    	['Node_1', 35.0156, -85.0867], 
-	     	['Node_2', 35.0726, -85.0477],
-	     	['Node_3', 35.0146, -85.0017],
-	     	['Node_4', 35.0456, -85.0047],
-	     	['Node_5', 35.0116, -85.0467],
-	     	['Node_6', 35.0596, -85.0457],
-	     	['Node_7', 35.0236, -85.0497]
 	     ]; 
 
+        // On initialize take in the IP as well as the Lat/Lon of the user
+        lat = geoip_latitude(); 
+        lon = geoip_longitude(); 
+        alert(lat + " " + lon)
 
+        // Pass that info into the list
+        nodes.push("Node_2", lon, lat); 
 
+         // This is the Map Options that are specified by Google's API
         var mapOptions = 
         {
             center: new google.maps.LatLng(35.0196, -85.0497),
-            zoom: 12,
+            zoom: 5,
             mapTypeId: google.maps.MapTypeId.ROADMAP
          };
 
+         // Create the canvas
         var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
          var infowindow = new google.maps.InfoWindow(); 
          var marker, i; 
 
+         alert(nodes.length)
+
+         // Run through the list and add all of the Locations to the maps as markers
          for(i=0; i<nodes.length; i++)
          {
          	marker = new google.maps.Marker({
@@ -32,6 +38,7 @@
          		map: map
          	}); 
 
+            // On click display the markers title
          	google.maps.event.addListener(marker, 'click', (function(marker,i){
          		return function(){
          			infowindow.setContent(nodes[i][0]); 
@@ -40,13 +47,4 @@
          		}
          	})(marker, i)); 
          }
-
-         	var image = new google.maps.MarkerImage('plane.png'); 
-         	plane = new google.maps.Marker({
-         		position: new google.maps.LatLng(34.9006, -85.0390),
-         		map: map,
-         		icon: image
-         	}); 
-
-         	google.maps.event.addListener(plane); 
-}
+} // end initalize function

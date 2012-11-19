@@ -1,6 +1,9 @@
  function initialize() 
  {
 
+    // See if I can get IP on initialize
+    
+
 	    var nodes = [
 	    	['Node_1', 35.0156, -85.0867], 
 	     	['Node_2', 35.0726, -85.0477],
@@ -51,3 +54,7 @@
          	google.maps.event.addListener(plane); 
 }
 
+function animate()
+{
+    
+}
